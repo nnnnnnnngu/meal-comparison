@@ -13,9 +13,7 @@ class LocationFactory extends Factory
     {
         return [
             'name' => $this->faker->company, // Using company name as the location name
-            'city' => $this->faker->city,
             'zip_code' => $this->faker->postcode,
-            'address' => $this->faker->address,
         ];
     }
 }
