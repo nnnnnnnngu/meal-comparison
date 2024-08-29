@@ -20,9 +20,4 @@ class MealDetail extends Component
             ->limit(3)
             ->get();
     }
-
-    public function addToCompare()
-    {
-        // Logic to add the meal to comparison list
-    }
 }

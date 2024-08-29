@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MealComparisonController;
 use App\Livewire\MealDetail;
 use App\Livewire\MealList;
 use Illuminate\Support\Facades\Route;
@@ -7,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', MealList::class)->name('meals.index');
 Route::get('/meals/{mealId}', MealDetail::class)->name('meals.show');
+Route::get('/meals/compare', [MealComparisonController::class])->name('meals.compare');
 
 
 Route::middleware([

@@ -38,6 +38,9 @@
             </main>
         </div>
 
+        <!-- Floating Icon -->
+        @livewire('comparison-list')
+
         @stack('modals')
 
         @livewireScripts

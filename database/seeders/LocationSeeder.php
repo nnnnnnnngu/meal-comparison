@@ -13,7 +13,7 @@ class LocationSeeder extends Seeder
      */
     public function run()
     {
-        Location::factory()->count(10)->create();
+        Location::factory()->count(3)->create();
     }
 
 }
