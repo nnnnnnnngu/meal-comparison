@@ -1,5 +1,5 @@
-<div x-data="{ showIcon: false,  showList: false, count: @entangle('comparisonCount') }"
-     x-init="$watch('count', value => { showIcon = value > 0 })"
+<div x-data="{ showList: false, count: @entangle('comparisonCount') }"
+{{--     x-init="$watch('count', value => { showIcon = value > 0 })"--}}
      >
     <div
          class="fixed bottom-4 right-4 z-50">
@@ -21,7 +21,7 @@
         <!-- Panel Header -->
         <div class="bg-blue-500 text-white p-4 flex items-center justify-between">
             <h2 class="text-lg font-semibold">Comparison List</h2>
-            <button @click="open = false" class="text-white">
+            <button @click="showList = false" class="text-white">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -34,7 +34,7 @@
                 <ul class="space-y-4">
                     @foreach($comparisonMeals as $meal)
                         <li class="flex space-x-4">
-                            <img src="{{ $meal->image_url }}" alt="{{ $meal->name }}" class="w-16 h-16 object-cover rounded-lg">
+                            <img src="{{ $meal->image_url }}" alt="{{ $meal->name }}" class="w-16 h-16 flex-none object-cover rounded-lg">
                             <div>
                                 <h3 class="text-lg font-semibold">{{ $meal->name }}</h3>
                                 <p class="text-gray-600">{{ $meal->description }}</p>
@@ -46,9 +46,18 @@
                     <button wire:click="clearComparisonList" class="bg-red-500 text-white px-4 py-2 rounded-lg">
                         Clear List
                     </button>
-                    <a href="{{ route('meals.compare', ['ids' => implode(',', $comparisonList)]) }}" class="bg-blue-500 text-white px-4 py-2 rounded-lg">
+                    @if($comparisonCount < 2)
+                        <span class="bg-blue-500 text-white px-4 py-2 rounded-lg {{ $comparisonCount < 2 ? 'opacity-50 cursor-not-allowed' : '' }}" >
+                            Compare
+                        </span>
+                    @else
+                    <a href="{{ route('meals.compare') }}"
+                       class="bg-blue-500 text-white px-4 py-2 rounded-lg {{ $comparisonCount < 2 ? 'opacity-50 cursor-not-allowed' : '' }}" >
                         Compare
                     </a>
+                    @endif
+
+
                 </div>
             @else
                 <p class="text-gray-600">No items in the comparison list.</p>

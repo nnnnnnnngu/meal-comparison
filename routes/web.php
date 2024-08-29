@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', MealList::class)->name('meals.index');
+Route::get('/compare', MealComparisonController::class)->name('meals.compare');
 Route::get('/meals/{mealId}', MealDetail::class)->name('meals.show');
-Route::get('/meals/compare', [MealComparisonController::class])->name('meals.compare');
 
 
 Route::middleware([

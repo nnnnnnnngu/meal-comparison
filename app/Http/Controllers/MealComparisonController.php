@@ -12,13 +12,13 @@ class MealComparisonController extends Controller
      */
     public function __invoke(Request $request)
     {
-        // Get the IDs from the request
-        $ids = explode(',', $request->query('ids'));
+        // Get the comparison list from the session
+        $mealIds = session()->get('comparison_list', []);
 
-        // Fetch meals based on the IDs
-        $meals = Meal::whereIn('id', $ids)->with(['ingredients', 'attributes', 'preparationMethods', 'sauces', 'bunTypes', 'meatOptions'])->get();
+        // Fetch the meals from the database
+        $meals = Meal::whereIn('id', $mealIds)->get();
 
-        // Pass the meals to the view
-        return view('meals.compare', compact('meals'));
+        // Pass the meals to the comparison view
+        return view('compare', compact('meals'));
     }
 }
