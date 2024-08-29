@@ -2,41 +2,48 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Meal;
+use App\Models\PreparationMethod;
+use App\Models\Sauce;
+use App\Models\BunType;
+use App\Models\MeatOption;
+use App\Models\Location;
 
 class MealSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run()
     {
-        $location1 = \App\Models\Location::first();
 
-        $burger = \App\Models\Meal::create([
-            'name' => 'Classic Burger',
-            'description' => 'A classic beef burger with cheddar cheese and crispy lettuce.',
-            'meal_type' => 'burger',
-            'location_id' => $location1->id,
-        ]);
+        // Create some sample PreparationMethods, Sauces, BunTypes, and MeatOptions
+        $preparationMethods = PreparationMethod::factory()->count(5)->create();
+        $sauces = Sauce::factory()->count(5)->create();
+        $bunTypes = BunType::factory()->count(5)->create();
+        $meatOptions = MeatOption::factory()->count(5)->create();
 
-        $burger->ingredients()->attach([\App\Models\Ingredient::where('name', 'Brioche Bun')->first()->id, \App\Models\Ingredient::where('name', '100% Beef')->first()->id, \App\Models\Ingredient::where('name', 'Cheddar Cheese')->first()->id]);
-        $burger->attributes()->attach([\App\Models\Attribute::where('name', 'Crispy')->first()->id, \App\Models\Attribute::where('name', 'Juicy')->first()->id]);
+        // Create some sample Meals and associate them with PreparationMethods, Sauces, BunTypes, MeatOptions, and Locations
+        Meal::factory()->count(10)->create()->each(function ($meal) use ($preparationMethods, $sauces, $bunTypes, $meatOptions) {
+            // Attach random preparation methods
+            $meal->preparationMethods()->attach(
+                $preparationMethods->random(2)->pluck('id')
+            );
 
-        $location2 = \App\Models\Location::latest()->first();
+            // Attach random sauces
+            $meal->sauces()->attach(
+                $sauces->random(2)->pluck('id')
+            );
 
-        $pizza = \App\Models\Meal::create([
-            'name' => 'Peperoni Pizza',
-            'description' => 'A Peperoni Pizza.',
-            'meal_type' => 'pizza',
-            'location_id' => $location2->id,
-        ]);
+            // Attach random bun types
+            $meal->bunTypes()->attach(
+                $bunTypes->random(1)->pluck('id')
+            );
 
-        $pizza->ingredients()->attach([  \App\Models\Ingredient::where('name', 'Cheddar Cheese')->first()->id]);
-        $pizza->attributes()->attach([\App\Models\Attribute::where('name', 'Crispy')->first()->id, \App\Models\Attribute::where('name', 'Juicy')->first()->id]);
+            // Attach random meat options
+            $meal->meatOptions()->attach(
+                $meatOptions->random(1)->pluck('id')
+            );
 
-        // Add more meals as needed
+            $meal->save();
+        });
     }
-
 }

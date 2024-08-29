@@ -25,10 +25,10 @@ class DatabaseSeeder extends Seeder
             LocationSeeder::class,
             IngredientSeeder::class,
             AttributeSeeder::class,
-            BunTypeSeeder::class,
-            MeatOptionSeeder::class,
-            PreparationMethodSeeder::class,
-            SauceSeeder::class,
+//            BunTypeSeeder::class,
+//            MeatOptionSeeder::class,
+//            PreparationMethodSeeder::class,
+//            SauceSeeder::class,
             MealSeeder::class,
         ]);
     }
