@@ -6,15 +6,15 @@
                 <h2 class="text-lg font-semibold mb-4">Filters</h2>
 
                 <!-- Meal Type Filter -->
-                <div class="mb-4">
-                    <label class="block font-medium text-gray-700">Meal Type</label>
-                    <select wire:model.live="mealType" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
-                        <option value="">All Types</option>
-                        <option value="burger">Burger</option>
-                        <option value="pizza">Pizza</option>
-                        <!-- Add more meal types as needed -->
-                    </select>
-                </div>
+{{--                <div class="mb-4">--}}
+{{--                    <label class="block font-medium text-gray-700">Meal Type</label>--}}
+{{--                    <select wire:model.live="mealType" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">--}}
+{{--                        <option value="">All Types</option>--}}
+{{--                        <option value="burger">Burger</option>--}}
+{{--                        <option value="pizza">Pizza</option>--}}
+{{--                        <!-- Add more meal types as needed -->--}}
+{{--                    </select>--}}
+{{--                </div>--}}
 
                 <!-- Ingredients Filter -->
                 <div class="mb-4">
@@ -112,31 +112,40 @@
         <div class="col-span-2">
             <div class="grid grid-cols-1 gap-4">
                 @forelse($meals as $meal)
-                    <div class="bg-white p-4 rounded-lg shadow">
-                        <h3 class="text-xl font-semibold">{{ $meal->name }}</h3>
-                        <p class="mt-2 text-gray-600">{{ $meal->description }}</p>
+                    <div class="bg-white p-4 rounded-lg shadow ">
+                        <div class="flex space-x-4">
+                            <!-- Meal Image -->
+                            <div class="flex-shrink-0">
+                                <img src="{{ $meal->image_url }}" alt="{{ $meal->name }}" class="w-40 h-40 object-cover rounded-lg">
+                            </div>
 
-                        <!-- Meal Details -->
-                        <div class="mt-4">
-                            <strong>Type:</strong> {{ ucfirst($meal->meal_type) }}
+                            <!-- Meal Details -->
+                            <div>
+                                <h3 class="text-xl font-semibold">{{ $meal->name }}</h3>
+                                <p class="mt-2 text-gray-600">{{ $meal->description }}</p>
+
+                                <!-- Meal Details -->
+                                <div class="mt-2">
+                                    <strong>Ingredients:</strong> {{ $meal->ingredients->pluck('name')->join(', ') }}
+                                </div>
+                                <div class="mt-2">
+                                    <strong>Attributes:</strong> {{ $meal->attributes->pluck('name')->join(', ') }}
+                                </div>
+                            </div>
                         </div>
-                        <div class="mt-2">
-                            <strong>Ingredients:</strong> {{ $meal->ingredients->pluck('name')->join(', ') }}
-                        </div>
-                        <div class="mt-2">
-                            <strong>Attributes:</strong> {{ $meal->attributes->pluck('name')->join(', ') }}
-                        </div>
-                        <div class="mt-2">
-                            <strong>Preparation Methods:</strong> {{ $meal->preparationMethods->pluck('name')->join(', ') }}
-                        </div>
-                        <div class="mt-2">
-                            <strong>Sauces:</strong> {{ $meal->sauces->pluck('name')->join(', ') }}
-                        </div>
-                        <div class="mt-2">
-                            <strong>Bun Types:</strong> {{ $meal->bunTypes->pluck('name')->join(', ') }}
-                        </div>
-                        <div class="mt-2">
-                            <strong>Meat/Vegetarian Options:</strong> {{ $meal->meatOptions->pluck('name')->join(', ') }}
+                        <div class="grid grid-cols-2 gap-2">
+                            <div class="mt-2">
+                                <strong>Preparation Methods:</strong> {{ $meal->preparationMethods->pluck('name')->join(', ') }}
+                            </div>
+                            <div class="mt-2">
+                                <strong>Sauces:</strong> {{ $meal->sauces->pluck('name')->join(', ') }}
+                            </div>
+                            <div class="mt-2">
+                                <strong>Bun Types:</strong> {{ $meal->bunTypes->pluck('name')->join(', ') }}
+                            </div>
+                            <div class="mt-2">
+                                <strong>Meat/Vegetarian Options:</strong> {{ $meal->meatOptions->pluck('name')->join(', ') }}
+                            </div>
                         </div>
                     </div>
                 @empty
@@ -144,6 +153,7 @@
                         <p class="text-gray-600">No meals found.</p>
                     </div>
                 @endforelse
+
             </div>
         </div>
     </div>

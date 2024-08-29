@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
+            $table->text('image_url');
             $table->string('meal_type'); // e.g., burger, pizza
             $table->foreignId('location_id')->constrained()->onDelete('cascade');
             $table->timestamps();

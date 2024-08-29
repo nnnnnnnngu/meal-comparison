@@ -9,20 +9,24 @@ use App\Models\Sauce;
 use App\Models\BunType;
 use App\Models\MeatOption;
 use App\Models\Location;
+use App\Models\Ingredient;
+use App\Models\Attribute;
 
 class MealSeeder extends Seeder
 {
     public function run()
     {
+        // Fetch existing records from the database
+        $preparationMethods = PreparationMethod::all();
+        $sauces = Sauce::all();
+        $bunTypes = BunType::all();
+        $meatOptions = MeatOption::all();
+        $locations = Location::all();
+        $ingredients = Ingredient::all();
+        $attributes = Attribute::all();
 
-        // Create some sample PreparationMethods, Sauces, BunTypes, and MeatOptions
-        $preparationMethods = PreparationMethod::factory()->count(5)->create();
-        $sauces = Sauce::factory()->count(5)->create();
-        $bunTypes = BunType::factory()->count(5)->create();
-        $meatOptions = MeatOption::factory()->count(5)->create();
-
-        // Create some sample Meals and associate them with PreparationMethods, Sauces, BunTypes, MeatOptions, and Locations
-        Meal::factory()->count(10)->create()->each(function ($meal) use ($preparationMethods, $sauces, $bunTypes, $meatOptions) {
+        // Create some sample Meals and associate them with PreparationMethods, Sauces, BunTypes, MeatOptions, Locations, Ingredients, and Attributes
+        Meal::factory()->count(10)->create()->each(function ($meal) use ($preparationMethods, $sauces, $bunTypes, $meatOptions, $locations, $ingredients, $attributes) {
             // Attach random preparation methods
             $meal->preparationMethods()->attach(
                 $preparationMethods->random(2)->pluck('id')
@@ -43,6 +47,18 @@ class MealSeeder extends Seeder
                 $meatOptions->random(1)->pluck('id')
             );
 
+            // Attach random ingredients
+            $meal->ingredients()->attach(
+                $ingredients->random(3)->pluck('id')
+            );
+
+            // Attach random attributes
+            $meal->attributes()->attach(
+                $attributes->random(2)->pluck('id')
+            );
+
+            // Assign a random location
+            $meal->location_id = $locations->random()->id;
             $meal->save();
         });
     }

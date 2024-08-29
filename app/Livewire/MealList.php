@@ -19,15 +19,15 @@ class MealList extends Component
     public $selectedSauces = [];
     public $selectedBunTypes = [];
     public $selectedMeatOptions = [];
-    public $mealType;
+//    public $mealType;
 
     public function render()
     {
         // Fetch meals based on filters
         $meals = Meal::with('ingredients', 'attributes', 'preparationMethods', 'sauces', 'bunTypes', 'meatOptions')
-            ->when($this->mealType, function($query) {
-                $query->where('meal_type', $this->mealType);
-            })
+//            ->when($this->mealType, function($query) {
+//                $query->where('meal_type', $this->mealType);
+//            })
             ->when($this->selectedIngredients, function($query) {
                 $query->whereHas('ingredients', function($query) {
                     $query->whereIn('ingredients.id', $this->selectedIngredients);
