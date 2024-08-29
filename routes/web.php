@@ -1,10 +1,11 @@
 <?php
 
+use App\Livewire\MealList;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', MealList::class)->name('meals.index');
+
 
 Route::middleware([
     'auth:sanctum',
