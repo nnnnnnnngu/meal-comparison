@@ -21,4 +21,3 @@ class CreateMealSauceTable extends Migration
         Schema::dropIfExists('meal_sauce');
     }
 }
-

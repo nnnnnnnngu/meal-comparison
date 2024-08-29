@@ -16,4 +16,3 @@ class Sauce extends Model
         return $this->belongsToMany(Meal::class);
     }
 }
-

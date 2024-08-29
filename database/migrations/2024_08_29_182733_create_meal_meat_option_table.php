@@ -21,4 +21,3 @@ class CreateMealMeatOptionTable extends Migration
         Schema::dropIfExists('meal_meat_option');
     }
 }
-

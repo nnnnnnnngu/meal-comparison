@@ -16,4 +16,3 @@ class SauceFactory extends Factory
         ];
     }
 }
-

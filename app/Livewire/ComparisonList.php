@@ -2,12 +2,13 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
 use App\Models\Meal;
+use Livewire\Component;
 
 class ComparisonList extends Component
 {
     public $comparisonList = [];
+
     public $comparisonCount = 0;
 
     protected $listeners = ['addToCompare' => 'addToCompare'];
@@ -21,7 +22,7 @@ class ComparisonList extends Component
 
     public function addToCompare($mealId)
     {
-        if (!in_array($mealId, $this->comparisonList)) {
+        if (! in_array($mealId, $this->comparisonList)) {
             $this->comparisonList[] = $mealId;
             $this->comparisonCount = count($this->comparisonList);
 
@@ -38,10 +39,12 @@ class ComparisonList extends Component
         // Clear the comparison list from session
         session()->forget('comparison_list');
     }
+
     public function getComparisonMealsProperty()
     {
         return Meal::whereIn('id', $this->comparisonList)->get();
     }
+
     public function render()
     {
         return view('livewire.comparison-list', [

@@ -16,4 +16,3 @@ class Attribute extends Model
         return $this->belongsToMany(Meal::class);
     }
 }
-

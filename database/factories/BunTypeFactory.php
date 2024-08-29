@@ -16,4 +16,3 @@ class BunTypeFactory extends Factory
         ];
     }
 }
-

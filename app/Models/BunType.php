@@ -16,4 +16,3 @@ class BunType extends Model
         return $this->belongsToMany(Meal::class);
     }
 }
-

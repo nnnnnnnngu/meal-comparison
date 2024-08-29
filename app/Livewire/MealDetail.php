@@ -8,6 +8,7 @@ use Livewire\Component;
 class MealDetail extends Component
 {
     public $meal;
+
     public $recommendations = [];
 
     public function mount($mealId)

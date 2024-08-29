@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\PreparationMethod;
+use Illuminate\Database\Seeder;
 
 class PreparationMethodSeeder extends Seeder
 {
@@ -16,4 +16,3 @@ class PreparationMethodSeeder extends Seeder
         }
     }
 }
-

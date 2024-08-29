@@ -21,4 +21,3 @@ class CreateBunTypeMealTable extends Migration
         Schema::dropIfExists('meal_bun_type');
     }
 }
-

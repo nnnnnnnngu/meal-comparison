@@ -16,4 +16,3 @@ class Ingredient extends Model
         return $this->belongsToMany(Meal::class);
     }
 }
-

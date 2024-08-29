@@ -21,4 +21,3 @@ class CreateMealPreparationMethodTable extends Migration
         Schema::dropIfExists('meal_preparation_method');
     }
 }
-

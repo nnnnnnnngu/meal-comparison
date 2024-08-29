@@ -16,4 +16,3 @@ class MeatOption extends Model
         return $this->belongsToMany(Meal::class);
     }
 }
-

@@ -16,4 +16,3 @@ class PreparationMethodFactory extends Factory
         ];
     }
 }
-

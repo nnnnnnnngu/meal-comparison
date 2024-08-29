@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class IngredientSeeder extends Seeder
@@ -17,5 +16,4 @@ class IngredientSeeder extends Seeder
         \App\Models\Ingredient::create(['name' => 'Cheddar Cheese', 'type' => 'cheese']);
         // Add more ingredients as needed
     }
-
 }

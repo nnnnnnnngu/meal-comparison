@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class AttributeSeeder extends Seeder
@@ -17,5 +16,4 @@ class AttributeSeeder extends Seeder
         \App\Models\Attribute::create(['name' => 'Cheesy']);
         // Add more attributes as needed
     }
-
 }

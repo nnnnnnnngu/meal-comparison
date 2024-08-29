@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Sauce;
+use Illuminate\Database\Seeder;
 
 class SauceSeeder extends Seeder
 {
@@ -16,4 +16,3 @@ class SauceSeeder extends Seeder
         }
     }
 }
-

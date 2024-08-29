@@ -2,15 +2,15 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
+use App\Models\Attribute;
+use App\Models\BunType;
+use App\Models\Ingredient;
+use App\Models\Location;
 use App\Models\Meal;
+use App\Models\MeatOption;
 use App\Models\PreparationMethod;
 use App\Models\Sauce;
-use App\Models\BunType;
-use App\Models\MeatOption;
-use App\Models\Location;
-use App\Models\Ingredient;
-use App\Models\Attribute;
+use Illuminate\Database\Seeder;
 
 class MealSeeder extends Seeder
 {

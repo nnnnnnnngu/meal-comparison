@@ -15,7 +15,24 @@
 {{--                        <!-- Add more meal types as needed -->--}}
 {{--                    </select>--}}
 {{--                </div>--}}
+                <!-- ZIP Code Filter -->
+                <div class="mb-4">
+                    <label class="block font-medium text-gray-700">ZIP Code</label>
+                    <input type="text" wire:model.live="zipCode" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500" placeholder="Enter ZIP Code">
+                </div>
 
+{{--                // remove in production--}}
+                <div class="mb-4">
+                    @php
+                    $zipCodes = \App\Models\Location::whereHas('meals')->pluck('zip_code')->unique()->sort()->toArray()
+                    @endphp
+                            <!-- Display ZIP Codes -->
+                    <div class="text-xs">use the following ZIP codes for testing:
+                        @foreach($zipCodes as $zipCode)
+                            {{ $zipCode }},
+                            @endforeach
+                    </div>
+                </div>
                 <!-- Ingredients Filter -->
                 <div class="mb-4">
                     <label class="block font-medium text-gray-700">Ingredients</label>

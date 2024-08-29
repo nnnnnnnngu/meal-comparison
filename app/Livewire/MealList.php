@@ -2,24 +2,32 @@
 
 namespace App\Livewire;
 
+use App\Models\Attribute;
 use App\Models\BunType;
+use App\Models\Ingredient;
+use App\Models\Meal;
 use App\Models\MeatOption;
 use App\Models\PreparationMethod;
 use App\Models\Sauce;
 use Livewire\Component;
-use App\Models\Meal;
-use App\Models\Ingredient;
-use App\Models\Attribute;
 
 class MealList extends Component
 {
     public $selectedIngredients = [];
+
     public $selectedAttributes = [];
+
     public $selectedPreparationMethods = [];
+
     public $selectedSauces = [];
+
     public $selectedBunTypes = [];
+
     public $selectedMeatOptions = [];
-//    public $mealType;
+
+    public $zipCode = '';
+
+    //    public $mealType;
 
     public function render()
     {
@@ -28,33 +36,38 @@ class MealList extends Component
 //            ->when($this->mealType, function($query) {
 //                $query->where('meal_type', $this->mealType);
 //            })
-            ->when($this->selectedIngredients, function($query) {
-                $query->whereHas('ingredients', function($query) {
+            ->when($this->zipCode, function ($query) {
+                $query->whereHas('location', function ($query) {
+                    $query->where('zip_code', $this->zipCode);
+                });
+            })
+            ->when($this->selectedIngredients, function ($query) {
+                $query->whereHas('ingredients', function ($query) {
                     $query->whereIn('ingredients.id', $this->selectedIngredients);
                 });
             })
-            ->when($this->selectedAttributes, function($query) {
-                $query->whereHas('attributes', function($query) {
+            ->when($this->selectedAttributes, function ($query) {
+                $query->whereHas('attributes', function ($query) {
                     $query->whereIn('attributes.id', $this->selectedAttributes);
                 });
             })
-            ->when($this->selectedPreparationMethods, function($query) {
-                $query->whereHas('preparationMethods', function($query) {
+            ->when($this->selectedPreparationMethods, function ($query) {
+                $query->whereHas('preparationMethods', function ($query) {
                     $query->whereIn('preparation_methods.id', $this->selectedPreparationMethods);
                 });
             })
-            ->when($this->selectedSauces, function($query) {
-                $query->whereHas('sauces', function($query) {
+            ->when($this->selectedSauces, function ($query) {
+                $query->whereHas('sauces', function ($query) {
                     $query->whereIn('sauces.id', $this->selectedSauces);
                 });
             })
-            ->when($this->selectedBunTypes, function($query) {
-                $query->whereHas('bunTypes', function($query) {
+            ->when($this->selectedBunTypes, function ($query) {
+                $query->whereHas('bunTypes', function ($query) {
                     $query->whereIn('bun_types.id', $this->selectedBunTypes);
                 });
             })
-            ->when($this->selectedMeatOptions, function($query) {
-                $query->whereHas('meatOptions', function($query) {
+            ->when($this->selectedMeatOptions, function ($query) {
+                $query->whereHas('meatOptions', function ($query) {
                     $query->whereIn('meat_options.id', $this->selectedMeatOptions);
                 });
             })
