@@ -1,10 +1,12 @@
 <?php
 
+use App\Livewire\MealDetail;
 use App\Livewire\MealList;
 use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', MealList::class)->name('meals.index');
+Route::get('/meals/{mealId}', MealDetail::class)->name('meals.show');
 
 
 Route::middleware([

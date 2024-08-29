@@ -112,42 +112,7 @@
         <div class="col-span-2">
             <div class="grid grid-cols-1 gap-4">
                 @forelse($meals as $meal)
-                    <div class="bg-white p-4 rounded-lg shadow ">
-                        <div class="flex space-x-4">
-                            <!-- Meal Image -->
-                            <div class="flex-shrink-0">
-                                <img src="{{ $meal->image_url }}" alt="{{ $meal->name }}" class="w-40 h-40 object-cover rounded-lg">
-                            </div>
-
-                            <!-- Meal Details -->
-                            <div>
-                                <h3 class="text-xl font-semibold">{{ $meal->name }}</h3>
-                                <p class="mt-2 text-gray-600">{{ $meal->description }}</p>
-
-                                <!-- Meal Details -->
-                                <div class="mt-2">
-                                    <strong>Ingredients:</strong> {{ $meal->ingredients->pluck('name')->join(', ') }}
-                                </div>
-                                <div class="mt-2">
-                                    <strong>Attributes:</strong> {{ $meal->attributes->pluck('name')->join(', ') }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-2 gap-2">
-                            <div class="mt-2">
-                                <strong>Preparation Methods:</strong> {{ $meal->preparationMethods->pluck('name')->join(', ') }}
-                            </div>
-                            <div class="mt-2">
-                                <strong>Sauces:</strong> {{ $meal->sauces->pluck('name')->join(', ') }}
-                            </div>
-                            <div class="mt-2">
-                                <strong>Bun Types:</strong> {{ $meal->bunTypes->pluck('name')->join(', ') }}
-                            </div>
-                            <div class="mt-2">
-                                <strong>Meat/Vegetarian Options:</strong> {{ $meal->meatOptions->pluck('name')->join(', ') }}
-                            </div>
-                        </div>
-                    </div>
+                    <x-meal-card :meal="$meal" />
                 @empty
                     <div class="col-span-1">
                         <p class="text-gray-600">No meals found.</p>
